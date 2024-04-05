@@ -4,16 +4,24 @@ on:
       - main
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+    - name: Harden Runner
+      uses: step-security/harden-runner@63c24ba6bd7ba022e95695ff85de572c04a18142 # v2.7.0
+      with:
+        egress-policy: audit
+
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
       with:
         fetch-depth: 0
         
     - name: Secret Scanning
-      uses: trufflesecurity/trufflehog@main
+      uses: trufflesecurity/trufflehog@3cb7aedf4a37186e24418cd577445f65ee0839c8 # main
       with:
         extra_args: --only-verified

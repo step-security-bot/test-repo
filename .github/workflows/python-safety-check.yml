@@ -9,8 +9,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@63c24ba6bd7ba022e95695ff85de572c04a18142 # v2.7.0
+        with:
+          egress-policy: audit
+
       - name: Check out master
-        uses: actions/checkout@master
+        uses: actions/checkout@61b9e3751b92087fd0b06925ba6dd6314e06f089 # master
         
       - name: Security vulnerabilities scan
-        uses: aufdenpunkt/python-safety-check@master
+        uses: aufdenpunkt/python-safety-check@d5468d88a766a647545a256f118b216833f91088 # master
