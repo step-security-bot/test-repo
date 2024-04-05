@@ -1,9 +1,6 @@
 name: Python safety check
 
-on:
-  push:
-    branches:
-      - master
+on: [push]
 
 env:
   DEP_PATH: src/requirements.txt
